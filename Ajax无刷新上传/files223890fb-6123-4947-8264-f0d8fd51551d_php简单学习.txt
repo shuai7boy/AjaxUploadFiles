@@ -1,0 +1,12 @@
+设置首页:找到httpd.conf文件中的DirectoryIndex ,后面及是设置网站首页
+修改端口号:找到httpd.conf文件中Listen,修改即可
+开启虚拟主机：同样找到上面的文件里面的#Include conf/extra/httpd-vhosts.conf这句话，可以根据vhosts查找，然后把前面的#去掉，就证明开启虚拟主机
+配置虚拟主机:找到httpd-vhosts.conf文件。
+<VirtualHost *:80>
+DocumentRoot "C:/web1"
+ServerName www.baidu.com
+ <Directory "C:/web1"> //设置访问权限
+    Allow from all
+ </Directory>
+</VirtualHost>
+这样当输入百度网址时，就访问web1了

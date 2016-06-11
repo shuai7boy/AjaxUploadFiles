@@ -1,0 +1,249 @@
+-moz代表firefox浏览器私有属性
+-ms代表IE浏览器私有属性
+-webkit代表chrome、safari私有属性
+
+
+~设置圆形:border-radius：50px;//还可以在后面添加几个参数，这样就可以设置不同大小的圆角。
+要设置椭圆的话，可以这样写:border-radius:50%;
+常用标签:
+ ~<header></header>用于表示文章的头部
+ ~<footer></footer>用于表示文章的尾部
+ ~<nav></nav>导航标签 。特点:使用更灵活。例如:<nav><p><a href="#">RYJ</a></p> <span><a href="#">RYJ</a></span></nav>
+ ~<section></section>页面上的版块
+ ~<article>主体</article>
+ ~<aside>和主体相关的附属信息</aside>
+语义化标签:
+  <time>填写时间</time>
+  <dialog></dialog>//表示一段对话，里面嵌套dt、dd标签
+  例如:<dialog>
+       <dt>Hello</dt><dd>Hi</dd>
+	   <dt>How are you?</dt><dt>I am fine</dt>
+       </dialog>
+功能标签:
+<datalist</datalist>//预测可能会出现的值,例如:
+<input type="text" list="valList"/>
+<datalist id="valList">
+<option>河北</option> 
+<option>河南</option>
+</datalist>
+ <details></details>//点击展示详情与summary标签一起使用
+ 例如:<details>如果加上open，及<details open>这样数据就会展开显示
+       <summary>摘要</summary>
+	   <p>请收看新闻摘要</p>
+      </details>
+标记标签:<mark></mark>//里面的文子的背景色就变成了黄色
+公钥:<keygen name="sec"/>//提交表单时，后面自动跟一大串公钥
+进度条:<progress max="100" value="50"/>
+<span>50</span>%
+</progress>
+新增表单控件：
+自动校验邮箱:<input type="email"/>
+<input type="tel"/>：键盘自动切换为数字键盘
+<input type="url"/>:自动校验URL
+<input type="search"/>：搜索，输入框后面多了一个叉
+<input type="range" value="2" step="2" min="0" max="20"/>/：范围选择。value定位当前值，step定义每次跳几格
+<input type="number"/>:数值选择
+<input type="color"/>:颜色选择
+<input type="date"/>：选择日期
+<input type="time"/>：设置时间
+<input type="week"/>:定位到第几周
+<input type="month"/>:定位到第几个月
+<input type="password" placeholder="请输入你的名字..."/>:显示默认内容
+<input type="text"  autocomplete="off"/>:去掉自动填充内容
+<input type="text" autofocus/>:定位焦点
+<input type="text" required/>:为必填内容
+<input type="text" pattern="\d{1,5}"/>:正则表达式,这个正则表达式的含义是输入1~5个数字
+<input type="submit" formaction="http://tieba.baidu.com/" formnovalidate  value="保存到草稿箱"/>:方便用户存储草稿信息,formnovalidate是关闭表单验证
+~<input type="text" multiple/>//这样即可实现多选
+
+JSON新方法:
+~JSON.parse:只能解析JSON格式的数据
+var str='{"name":"hello","age":"12"}';//注意这得JSON格式一定要严格，属性加上""，属性值看格式而定
+var rec=JSON.parse(str);
+alert(rec.age);
+~eval:可以解析任何形式的字符串
+~JSON.stringify:将JSON解析成字符串格式
+var str={"name":"张三",age:21}
+var rec=JSON.stringify(str);
+alert(rec);
+这时会弹出{"name":"张三",age:21}
+~点击显示图片演示
+function showImg(){
+var fileDom=document.getElementById("file1");
+var files=fileDom.files;
+for(var i=0;i<files.length;i++){
+var item=files[i];
+var fileReader=new FileReader();
+fileReader.readAsDataURL(item);
+fileReader.onload=function(){
+var dataUrl=this.result;
+document.getElementById("img_show").src=dataUrl;
+}
+}
+}
+---------------
+~画图片代码
+<canvas id="canvas_draw" width="1000" height="1000"></canvas>
+JS Code:
+//首先获取帆布对象
+var canvas=document.getElementById("canvas_draw");
+//获取上下文，注意后面要指定是2d或3d画布
+var context=canvas.getContext("2d");
+//声明一个image对象
+var img=new Image();
+//获取图片路径
+img.src="images/gz.jpg";
+img.onload=function(){
+context.drawImage(img,20,20,200,200);
+}
+---------------
+本地存储:都是以键值对的形式存储的,优势存储大小没限制，可以长期存储
+localStorage：
+例如：存储时间
+var tiem=new Date().toLocaleDateString();//首先获取时间
+//进行能力测试
+if(localStorage){
+localStorage.setItem("key1",time);//这样就存储好了
+}else{
+alert("浏览器不兼容");
+}
+-------------------
+设置段落的最小宽度：min-width：80px;可以有效解决网页宽度缩小DIV布局混乱问题
+
+//获取自定义属性的值
+html部分:
+<div id="dv1" data-ryj="日月君"></div>
+js部分:
+ var dv1=document.getElementById("dv1");
+	  alert(dv1.dataset.ryj);
+//将JS延期执行
+<script src="a.js" defer="defer"></script>
+//拖拽
+draggable='true'//设置允许拖拽
+dragstart,拖拽前触发
+dragend,拖拽后触发
+drag,拖拽期间触发
+dragenter,鼠标进入拖拽区域触发
+dragleave,鼠标离开拖拽区域触发
+dragover,在拖拽期间触发
+drop,在拖拽区域时触发，注意要想触发此事件，得在dragover事件中阻止默认事件，及加个e参数，然后e.preventDefault();
+ ev.dataTransfer.setData(key,value)，在dragstart中设置此事件，可以解决火狐不能拖拽问题
+ ev.dataTransfer.files//获取拖拽上去的文件
+ 文档消息通信:
+ ——和同域下通信:
+ 父级引用子级用contentWindow
+ dv1.contentWindow.document.body.style.background='blue';
+ ——不同域之间的通信
+ 发送信息：
+ window.top.postMessage("1","http://www.a.com");//第一个参数是传递的参数 ，第二个参数是接收的域名
+ 接受信息，根据信息做不同的处理
+  window.addEventListener("message",function(ev){if(ev.data=="1"){document.body.style.background='green';}},true);
+  //message事件的事件对象，保存了发送过来的内容
+  //ev.data发送过来的数据
+ ——通过异步请求发送文件:
+      xml.open("post", "HandlerFiles.ashx", true);
+        xml.setRequestHeader('X-Request-Width', 'XMLHttpRequest');
+        var oFormData = new FormData();//通过FormData构建提交数据
+        oFormData.append("file", file.files[0]);     
+        xml.send(oFormData);
+------------------------------------------------以上是H5部分，下面是CSS3部分-----------------
+设置过渡渐变效果:transition:1s;//这样就产生1s的动画过渡效果
+box-shadow: 10px 10px 5px #888888;//设置边框阴影效果，参数分别是：左右偏移，上下偏移，模糊程度，阴影颜色
+text-shadow:10px 10px 5px #888888;//设置文字阴影效果
+box-shadow:inset 3px 3px 10px blue;//inset设置内透阴影
+在第三个参数后面再加一个参数，比如3px,代表先扩展3px后然后才开始模糊
+input:focus{outline:none;}//设置搜索框获取焦点时不显示边框
+解决浏览器缩小，DIV布局向下走问题：左右DIV的爸爸设置一个宽度即可解决问题
+:first-child:选择其父元素的首个子元素,例如:p:first-child{color:red}
+:first-of-type:例如：p:first-of-type:选择其父元素其子类第一个为p类型的元素
+:target选择相应锚点触发事件：<a href="div1"><div id="div1" style="display:none"></div> css这么写：div:target{display:block;}
+设置禁用和启动输入框文本颜色:
+html代码:<input type="text" disabled value="hahahha"/>
+css代码: input:enabled{color:blue;}    input{color:#888888;} input:disabled{color:#888888;}
+这样当启动时(不加disabled)属性时，文本是蓝色，当禁用时，文本是灰色
+:checked：设置当复选框选中时，执行。例如: input:checked{width:200px;height:200px;}
+p~input//选择后面的兄弟标签
+p:first-line{}//给第一行设置样式
+p:first-letter{}//给首字母设置样式
+p::selection{}//设置选中文本时的样式,注意p后面就是::符号。例如:p::selection{color:red;background-color:pink;}
+p::before{content:"Hello";}//给文章最前面添加内容
+p::after{content:"Hello";}//给文章最后面添加内容
+p:not(.p1)//过滤指定元素，注意里面没有引号
+background:rgba(0,0,0,0.5);//rgba设置颜色和透明度,透明度设置范围（0~1）
+color:rgba(255,255,255,0.5);//让文字也透明
+-webkit-text-stroke:3px blue;//给字体描边
+direction:rtl;unicode-bidi:bidi-override;//让文字从右向左显示
+overflow:hidden;text-overflow:Ellipsis;//让超出部分显示省略号
+*和?都是通配符
+//盒子模型持续增大效果
+div:nth-of-type(1){-webkit-box-flex:1;}
+div:nth-of-type(1){-webkit-box-flex:2;}
+div:nth-of-type(1){-webkit-box-flex:3;}
+display:-webkit-box;//让div浮动横向显示
+//控制盒子位置的代码
+-webkit-box-pack:end;//end是向右对其 center是居中显示 Justify分布显示
+-webkit-box-align:center;//center是让盒子模型里面的东西居中 end是底部显示 start是顶部显示
+css代码:
+.box{display:-webkit-box;height:100px;-webkit-box-pack:end;}
+.box div{width:100px;height:100px;border:1px solid #fff;background-color:red;}	
+html代码:
+<div class="box">
+<div>1</div> <div>2</div> <div>3</div> <div>4</div> <div>5</div> </div>
+//让盒子页面居中
+     html{height:100%;}
+	body{height:100%;margin:0;}
+	.box{display:-webkit-box;height:100%;-webkit-box-pack:center;-webkit-box-align:center;}
+    .box div{width:100px;height:100px;border:1px solid #fff;background-color:red;}	
+------------------------------------------
+//设置倒影
+-webkit-box-reflect:below;//below设置向下倒影 above向上倒影 left向左 right向右
+background:-webkit-linear-gradient(green 0,red 100%);//设置线性渐变,参数含义是:从一个颜色 从哪开始 到哪个颜色
+resize:both;overflow:auto;//可以拖动Div改变Div大小,
+text-indent:2em；//首行缩进2字符
+//响应式布局
+column-width:100px;//栏目宽度
+column-count:4;//栏目列数
+column-gap:30px;//栏目距离
+column-rule:1px solid #000;//栏目间隔线
+核心要点:根据情况引用多种样式：
+html代码举例:
+	<link rel="stylesheet" type="text/css" href="Index1.css" media="screen and (min-width:800px)">
+	<link rel="stylesheet" type="text/css" href="Index2.css" media="screen and (min-width:600px) and (max-width:800px)">
+	<link rel="stylesheet" type="text/css" href="Index3.css" media="screen and (max-width:600px)">
+------------------------
+设置颜色渐变:
+background-image:-webkit-linear-gradient(left bottom,green,red);//参数含义:从哪里开始 渐变色是多少，后面颜色数可以任意加
+设置光标滑动效果:
+CSS代码:
+.box{width:200px;height:200px;background:-webkit-linear-gradient(180deg,rgba(255,255,255,0) 0,rgba(255,255,255,0) 150px,rgba(255,255,255,1) 170px,rgba(255,255,255,1) 180px,rgba(255,255,255,0) 210px) no-repeat -200px 0,url(1.jpg) no-repeat;transition:1s;}
+.box:hover{background-position:300px 0,0 0;}
+HTML代码:
+<div class="box"></div>
+圆形扩散渐变:
+radial-gradient(red,blue,yellow,pink);
+background-size:100% 100%;//让背景图片整个填充
+裁剪背景:
+-webkit-background-clip:text;//这时背景图片就被白色覆盖了,只显示文字
+遮罩效果:
+最初设置:-webkit-mask:url(1.png) no-repeat;
+鼠标移动上去设置:-webkit-mask-position:100% 100%;
+-webkit-transform:rotate(360deg);//rotate是设置旋转  skewX(-30deg)设置倾斜度 scale(0.5)缩放 translate(200px,0)控制移动方向,参数分别控制的是横坐标，纵坐标
+-webkit-transform-origin:right top;//设置旋转中心
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	  

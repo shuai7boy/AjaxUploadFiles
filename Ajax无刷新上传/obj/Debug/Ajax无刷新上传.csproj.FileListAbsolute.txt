@@ -1,0 +1,6 @@
+G:\代码存放\Ajax无刷新上传\Ajax无刷新上传\bin\Ajax无刷新上传.dll.config
+G:\代码存放\Ajax无刷新上传\Ajax无刷新上传\bin\Ajax无刷新上传.dll
+G:\代码存放\Ajax无刷新上传\Ajax无刷新上传\bin\Ajax无刷新上传.pdb
+G:\代码存放\Ajax无刷新上传\Ajax无刷新上传\obj\Debug\Ajax无刷新上传.csprojResolveAssemblyReference.cache
+G:\代码存放\Ajax无刷新上传\Ajax无刷新上传\obj\Debug\Ajax无刷新上传.dll
+G:\代码存放\Ajax无刷新上传\Ajax无刷新上传\obj\Debug\Ajax无刷新上传.pdb
